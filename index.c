@@ -39,4 +39,42 @@ void gameInit(Game *game)
   game->score = 0;
 }
 
+// Construit le board du jeu
+void makeBoard(Game *game)
+{
+  system("cls");
+  for (int index = 0; index < BOARDWIDTH + 2; index++)
+    printf("-");
+  printf("\n");
+  for (int index = 0; index < BOARDHEIGHT; index++)
+  {
+    printf("|");
+    for (int jindex = 0; jindex < BOARDWIDTH; jindex++)
+    {
+      int isSnake = 0;
+      for (int kindex = 0; kindex < game->size; kindex++)
+      {
+        if (game->snake[kindex].x == jindex && game->snake[kindex].y == index)
+        {
+          printf("o");
+          isSnake = 1;
+        }
+      }
+      if (!isSnake && game->foodX == jindex && game->foodY == index)
+      {
+        printf("X");
+      }
+      else if (!isSnake)
+      {
+        printf(" ");
+      }
+    }
+    printf("|\n");
+  }
+  for (int index = 0; index < BOARDWIDTH + 2; index++)
+    printf("_");
+  printf("\n");
+  printf("Score: %d\n", game->score);
+}
+
 //-----------------------------------------------------------------------------//
