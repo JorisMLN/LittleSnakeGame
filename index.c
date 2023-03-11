@@ -6,8 +6,13 @@
 
 //-----------------------------------------------------------------------------//
 // Constantes
+#define VERSION "v0.1.5"
 #define BOARDWIDTH 40
 #define BOARDHEIGHT 20
+#define WINDOWWIDTH 400
+#define WINDOWHEIGHT 440
+#define WINDOWPOSX 300
+#define WINDOWPOSY 300
 
 //-----------------------------------------------------------------------------//
 // Structure
@@ -75,7 +80,7 @@ void makeBoard(Game *game)
   }
   for (int index = 0; index < BOARDWIDTH + 2; index++)
   {
-    printf("_");
+    printf("-");
   }
   printf("\n");
   printf("Score: %d\n", game->score);
@@ -166,12 +171,16 @@ int main()
 {
   // active la fenetre
   HWND hwnd = GetForegroundWindow();
-
   // Définir la position et la taille de la fenêtre (posX, posY, width, height)
-  SetWindowPos(hwnd, HWND_TOPMOST, 300, 300, 400, 440, SWP_SHOWWINDOW);
+  SetWindowPos(hwnd, HWND_TOPMOST, WINDOWPOSX, WINDOWPOSY, WINDOWWIDTH, WINDOWHEIGHT, SWP_NOZORDER | SWP_NOMOVE | SWP_FRAMECHANGED);
 
-  // Display la fenêtre
-  ShowWindow(hwnd, SW_SHOW);
+  // Lock la taille de la window
+  HWND consoleWindow = GetConsoleWindow();
+  SetWindowLongPtr(consoleWindow, GWL_STYLE, GetWindowLongPtr(consoleWindow, GWL_STYLE) & ~WS_THICKFRAME);
+  ShowScrollBar(consoleWindow, SB_BOTH, FALSE);
+
+  // Set le nom de la fenetre 
+  SetConsoleTitle("Little Snake Game by Niridor/Izae - ", VERSION);
 
   // Lance le jeu
   runGame();
@@ -179,3 +188,7 @@ int main()
 }
 
 //-----------------------------------------------------------------------------//
+
+  //SetWindowPos(hwnd, HWND_TOPMOST, 300, 300, 400, 440, SWP_SHOWWINDOW);
+  // Display la fenêtre
+  //ShowWindow(hwnd, SW_SHOW);
