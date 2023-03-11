@@ -91,6 +91,8 @@ void move(Game *game)
 // Spawn pour la bouffe
 void spawnFood(Game *game)
 {
+  game->foodX = rand() % BOARDWIDTH;
+  game->foodY = rand() % BOARDHEIGHT;
 }
 
 // Check les collisions
