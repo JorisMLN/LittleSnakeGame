@@ -86,6 +86,26 @@ void makeBoard(Game *game)
 // Controle du snake
 void move(Game *game)
 {
+  for (int index = game->size - 1; index > 0; index--)
+  {
+    game->snake[index].x = game->snake[index - 1].x;
+    game->snake[index].y = game->snake[index - 1].y;
+  }
+  switch (_getch())
+  {
+  case 'w':
+    game->snake[0].y--;
+    break;
+  case 'a':
+    game->snake[0].x--;
+    break;
+  case 's':
+    game->snake[0].y++;
+    break;
+  case 'd':
+    game->snake[0].x++;
+    break;
+  }
 }
 
 // Spawn pour la bouffe
@@ -99,10 +119,7 @@ void spawnFood(Game *game)
 int checkCollision(Game *game)
 {
   // Bords du baord
-  if (game->snake[0].x < 0
-    || game->snake[0].x >= BOARDWIDTH 
-    || game->snake[0].y < 0
-    || game->snake[0].y >= BOARDHEIGHT)
+  if (game->snake[0].x < 0 || game->snake[0].x >= BOARDWIDTH || game->snake[0].y < 0 || game->snake[0].y >= BOARDHEIGHT)
   {
     return 1;
   }
@@ -110,15 +127,13 @@ int checkCollision(Game *game)
   // Avec le reste du snake
   for (int index = 1; index < game->size; index++)
   {
-    if (game->snake[0].x == game->snake[index].x 
-      && game->snake[0].y == game->snake[index].y)
+    if (game->snake[0].x == game->snake[index].x && game->snake[0].y == game->snake[index].y)
     {
       return 1;
     }
   }
   // Avec la bouffe
-  if (game->snake[0].x == game->foodX 
-    && game->snake[0].y == game->foodY)
+  if (game->snake[0].x == game->foodX && game->snake[0].y == game->foodY)
   {
     game->size++;
     game->score++;
