@@ -44,7 +44,9 @@ void makeBoard(Game *game)
 {
   system("cls");
   for (int index = 0; index < BOARDWIDTH + 2; index++)
+  {
     printf("-");
+  };
   printf("\n");
   for (int index = 0; index < BOARDHEIGHT; index++)
   {
@@ -58,7 +60,7 @@ void makeBoard(Game *game)
         {
           printf("o");
           isSnake = 1;
-        }
+        };
       }
       if (!isSnake && game->foodX == jindex && game->foodY == index)
       {
@@ -68,13 +70,57 @@ void makeBoard(Game *game)
       {
         printf(" ");
       }
-    }
+    };
     printf("|\n");
   }
   for (int index = 0; index < BOARDWIDTH + 2; index++)
+  {
     printf("_");
+  }
   printf("\n");
   printf("Score: %d\n", game->score);
+}
+
+//-----------------------------------------------------------------------------//
+
+// Controle du snake
+void move(Game *game)
+{
+}
+
+// Spawn pour la bouffe
+void spawnFood(Game *game)
+{
+}
+
+// Check les collisions
+int checkCollision(Game *game)
+{
+}
+
+//-----------------------------------------------------------------------------//
+// Loop du jeu pour play
+void runGame()
+{
+  Game game;
+  init(&game);
+  while (1)
+  {
+    makeBoard(&game);
+    move(&game);
+    if (checkCollision(&game))
+    {
+      printf("Game over!\n");
+      break;
+    }
+    Sleep(50); // Ralenti le jeu
+  }
+}
+
+// Lancement du Script
+void main()
+{
+  runGame();
 }
 
 //-----------------------------------------------------------------------------//
