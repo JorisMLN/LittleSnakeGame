@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------//
 // Constantes
 #define BOARDWIDTH 40
-#define BOARDHEIGHT 40
+#define BOARDHEIGHT 20
 
 //-----------------------------------------------------------------------------//
 // Structure
@@ -147,7 +147,7 @@ int checkCollision(Game *game)
 void runGame()
 {
   Game game;
-  init(&game);
+  gameInit(&game);
   while (1)
   {
     makeBoard(&game);
@@ -162,9 +162,20 @@ void runGame()
 }
 
 // Lancement du Script
-void main()
+int main()
 {
+  // active la fenetre
+  HWND hwnd = GetForegroundWindow();
+
+  // Définir la position et la taille de la fenêtre (posX, posY, width, height)
+  SetWindowPos(hwnd, HWND_TOPMOST, 300, 300, 400, 440, SWP_SHOWWINDOW);
+
+  // Display la fenêtre
+  ShowWindow(hwnd, SW_SHOW);
+
+  // Lance le jeu
   runGame();
+  return 0;
 }
 
 //-----------------------------------------------------------------------------//
