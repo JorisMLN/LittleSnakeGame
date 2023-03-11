@@ -98,6 +98,33 @@ void spawnFood(Game *game)
 // Check les collisions
 int checkCollision(Game *game)
 {
+  // Bords du baord
+  if (game->snake[0].x < 0
+    || game->snake[0].x >= BOARDWIDTH 
+    || game->snake[0].y < 0
+    || game->snake[0].y >= BOARDHEIGHT)
+  {
+    return 1;
+  }
+
+  // Avec le reste du snake
+  for (int index = 1; index < game->size; index++)
+  {
+    if (game->snake[0].x == game->snake[index].x 
+      && game->snake[0].y == game->snake[index].y)
+    {
+      return 1;
+    }
+  }
+  // Avec la bouffe
+  if (game->snake[0].x == game->foodX 
+    && game->snake[0].y == game->foodY)
+  {
+    game->size++;
+    game->score++;
+    spawnFood(game);
+  }
+  return 0;
 }
 
 //-----------------------------------------------------------------------------//
