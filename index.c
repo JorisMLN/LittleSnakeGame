@@ -6,13 +6,14 @@
 
 //-----------------------------------------------------------------------------//
 // Constantes
-#define VERSION "v0.1.5"
 #define BOARDWIDTH 40
 #define BOARDHEIGHT 20
 #define WINDOWWIDTH 400
 #define WINDOWHEIGHT 440
 #define WINDOWPOSX 300
 #define WINDOWPOSY 300
+
+#define TITLEBAR "Little Snake Game by Niridor/Izae - v0.1.5"
 
 //-----------------------------------------------------------------------------//
 // Structure
@@ -179,8 +180,8 @@ int main()
   SetWindowLongPtr(consoleWindow, GWL_STYLE, GetWindowLongPtr(consoleWindow, GWL_STYLE) & ~WS_THICKFRAME);
   ShowScrollBar(consoleWindow, SB_BOTH, FALSE);
 
-  // Set le nom de la fenetre 
-  SetConsoleTitle("Little Snake Game by Niridor/Izae - ", VERSION);
+  // Set le nom de la fenetre
+  SetConsoleTitle(TITLEBAR);
 
   // Lance le jeu
   runGame();
@@ -188,7 +189,3 @@ int main()
 }
 
 //-----------------------------------------------------------------------------//
-
-  //SetWindowPos(hwnd, HWND_TOPMOST, 300, 300, 400, 440, SWP_SHOWWINDOW);
-  // Display la fenêtre
-  //ShowWindow(hwnd, SW_SHOW);
