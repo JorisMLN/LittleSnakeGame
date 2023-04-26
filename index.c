@@ -6,17 +6,16 @@
 
 //-----------------------------------------------------------------------------//
 // Constantes
-#define BOARDWIDTH 40
-#define BOARDHEIGHT 20
+#define BOARDWIDTH 30
+#define BOARDHEIGHT 15
 #define WINDOWWIDTH 400
 #define WINDOWHEIGHT 440
-#define WINDOWPOSX 300
-#define WINDOWPOSY 300
+#define WINDOWPOSX 400
+#define WINDOWPOSY 400
 
 #define TITLEBAR "Little Snake Game by Niridor/Izae - v0.1.5"
 
 //-----------------------------------------------------------------------------//
-// Structure
 // Struc du snake
 typedef struct
 {
@@ -34,7 +33,6 @@ typedef struct
 
 //-----------------------------------------------------------------------------//
 // Init du jeu
-
 void gameInit(Game *game)
 {
   game->size = 1;
@@ -88,7 +86,6 @@ void makeBoard(Game *game)
 }
 
 //-----------------------------------------------------------------------------//
-
 // Controle du snake
 void move(Game *game)
 {
@@ -138,6 +135,7 @@ int checkCollision(Game *game)
       return 1;
     }
   }
+
   // Avec la bouffe
   if (game->snake[0].x == game->foodX && game->snake[0].y == game->foodY)
   {
@@ -145,7 +143,14 @@ int checkCollision(Game *game)
     game->score++;
     spawnFood(game);
   }
+
   return 0;
+}
+
+// Hub de fin de partie
+void gameOverScreen()
+{
+  printf("- - - G A M E / O V E R - - -");
 }
 
 //-----------------------------------------------------------------------------//
@@ -154,16 +159,23 @@ void runGame()
 {
   Game game;
   gameInit(&game);
+
   while (1)
   {
     makeBoard(&game);
     move(&game);
+
     if (checkCollision(&game))
     {
       printf("Game over!\n");
       break;
     }
-    Sleep(50); // Ralenti le jeu
+    // Sleep(50); // Ralenti le jeu
+  }
+
+  if(1)
+  {
+    gameOverScreen();
   }
 }
 
